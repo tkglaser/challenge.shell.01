@@ -74,5 +74,39 @@ namespace PriceCalculator.Tests
                 "TestOffer: -£3.00" + Environment.NewLine +
                 "Total: £9.34" + Environment.NewLine, cResult.ToString());
         }
+
+        [TestMethod]
+        public void ToString_WithOffersInPence_FormatsOutputCorrectly()
+        {
+            var cResult = new CalculationResult();
+            cResult.Add(12.34M);
+            cResult.AddOffer(new Offer
+            {
+                Description = "TestOffer",
+                PriceDelta = -0.01M
+
+            }, -0.03M);
+            Assert.AreEqual(
+                "Subtotal: £12.34" + Environment.NewLine +
+                "TestOffer: -3p" + Environment.NewLine +
+                "Total: £12.31" + Environment.NewLine, cResult.ToString());
+        }
+
+        [TestMethod]
+        public void ToString_WithOffersInPence2Digits_FormatsOutputCorrectly()
+        {
+            var cResult = new CalculationResult();
+            cResult.Add(12.34M);
+            cResult.AddOffer(new Offer
+            {
+                Description = "TestOffer",
+                PriceDelta = -0.1M
+
+            }, -0.3M);
+            Assert.AreEqual(
+                "Subtotal: £12.34" + Environment.NewLine +
+                "TestOffer: -30p" + Environment.NewLine +
+                "Total: £12.04" + Environment.NewLine, cResult.ToString());
+        }
     }
 }

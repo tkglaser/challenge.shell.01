@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PriceCalculator.Extensions;
 
 namespace PriceCalculator.Models
 {
@@ -42,16 +43,16 @@ namespace PriceCalculator.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"Subtotal: {SubTotal.ToString("C")}");
+            sb.AppendLine($"Subtotal: {SubTotal.ToCustomFormatString()}");
             foreach (var offer in Offers)
             {
-                sb.AppendLine($"{offer.Description}: {offer.PriceDelta.ToString("C")}");
+                sb.AppendLine($"{offer.Description}: {offer.PriceDelta.ToCustomFormatString()}");
             }
             if (!Offers.Any())
             {
                 sb.AppendLine("(No offers available)");
             }
-            sb.AppendLine($"Total: {Total.ToString("C")}");
+            sb.AppendLine($"Total: {Total.ToCustomFormatString()}");
             return sb.ToString();
         }
     }
