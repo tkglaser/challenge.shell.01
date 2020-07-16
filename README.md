@@ -27,7 +27,7 @@ cd PriceCalculator/bin/Debug/netcoreapp3.1
 ```
 
 ## Configuration
-The application expects a file called `appsettings.json` to be in the current directory. This file contains a list of products and offers. It can be found in this repo at `PriceCalculator/appsettings.json`. If the configuration file is not found, an exception is thrown informing the user that the file is missing. This is intentional because there is not much value in running without the config and I did not want to hard-code a default config.
+The application expects a file called `appsettings.json` to be in the current directory. This file contains a list of products and offers. It can be found in this repo at `PriceCalculator/appsettings.json`. If the configuration file is not found, an exception is thrown informing the user that the file is missing. This is intentional because there is not much value in running without the config and hardcoding a default config is dangerous because it can mask configuration errors.
 
 ## Testing the application
 
