@@ -6,11 +6,18 @@ using PriceCalculator.Models;
 
 namespace PriceCalculator
 {
+    /// <summary>
+    /// The pricing calculator
+    /// </summary>
     public class PriceCalculator
     {
         private readonly PriceCalculatorConfig _config;
         private readonly Dictionary<string, Product> _products;
 
+        /// <summary>
+        /// The constructor that takes the config from the DI container
+        /// </summary>
+        /// <param name="config">The config</param>
         public PriceCalculator(IOptions<PriceCalculatorConfig> config)
         {
             _config = config.Value;
@@ -21,6 +28,12 @@ namespace PriceCalculator
                 _products.Add(product.Name.ToLowerInvariant(), product);
             }
         }
+
+        /// <summary>
+        /// Calculate the basket value from the given input
+        /// </summary>
+        /// <param name="items">The items in string array form</param>
+        /// <returns>The result of the calculation</returns>
         public CalculationResult Calculate(string[] items)
         {
             var basket = new Basket(items);
@@ -31,13 +44,16 @@ namespace PriceCalculator
             }
 
             // copy basket because we're taking stuff out
-            // after applying the offer
+            // This is not strictly necessary but still a good idea for future
+            // extensions, i.e. in case we need to list the initial basket
             var offerBasket = new Basket(basket);
             foreach (var offer in _config.Offers)
             {
+                // How many times do the required items fit?
                 int fitsTimes = offerBasket.FitsTimes(offer.Condition);
                 if (fitsTimes > 0)
                 {
+                    // take items out and apply the offer
                     offerBasket.SubtractTimes(offer.Condition, fitsTimes);
                     result.AddOffer(offer, offer.PriceDelta * fitsTimes);
                 }
@@ -46,6 +62,12 @@ namespace PriceCalculator
             return result;
         }
 
+        /// <summary>
+        /// Returns the total price for a given product
+        /// </summary>
+        /// <param name="productId">The product</param>
+        /// <param name="count">How many times it is in the basket</param>
+        /// <returns>Total price</returns>
         private decimal GetTotal(string productId, int count)
         {
             if (!_products.ContainsKey(productId))

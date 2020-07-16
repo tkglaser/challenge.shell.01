@@ -1,5 +1,8 @@
 namespace PriceCalculator.Models
 {
+    /// <summary>
+    /// Represents an offer
+    /// </summary>
     public class Offer
     {
         public Basket Condition { get; set; }

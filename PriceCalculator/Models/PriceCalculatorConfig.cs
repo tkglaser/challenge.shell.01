@@ -1,5 +1,9 @@
 namespace PriceCalculator.Models
 {
+    /// <summary>
+    /// The configuration as loaded from appsettings.json
+    /// Contains products and offers
+    /// </summary>
     public class PriceCalculatorConfig
     {
         public const string Section = "PriceCalculator";
