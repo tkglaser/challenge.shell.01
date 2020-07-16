@@ -17,6 +17,7 @@ dotnet run
 
 Arguments can be passed after `dotnet run` like so:
 ```bash
+cd PriceCalculator
 dotnet run milk bread apple
 ```
 It is also possible to build the project into a Windows executable to achieve the command line as described in the PDF.
