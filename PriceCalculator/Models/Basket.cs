@@ -19,13 +19,14 @@ namespace PriceCalculator.Models
         {
             foreach (var item in items)
             {
-                if (!ContainsKey(item))
+                var safeitem = item.ToLowerInvariant();
+                if (!ContainsKey(safeitem))
                 {
-                    Add(item.ToLowerInvariant(), 1);
+                    Add(safeitem, 1);
                 }
                 else
                 {
-                    ++this[item.ToLowerInvariant()];
+                    ++this[safeitem];
                 }
             }
         }
@@ -61,7 +62,12 @@ namespace PriceCalculator.Models
         {
             foreach (var kvp in other)
             {
-                this[kvp.Key.ToLowerInvariant()] -= kvp.Value * times;
+                var safeKey = kvp.Key.ToLowerInvariant();
+                this[safeKey] -= kvp.Value * times;
+                if (this[safeKey] < 1)
+                {
+                    this.Remove(safeKey);
+                }
             }
         }
     }
