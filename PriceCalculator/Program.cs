@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PriceCalculator.Models;
@@ -11,6 +12,12 @@ namespace PriceCalculator
         private static IConfiguration _configuration;
         static void Main(string[] args)
         {
+            // SIMULATED COMMAND LINE!!! REMOVE
+            args = new string[] { "Apple", "Milk", "Bread" };
+
+            // TODO: Write custom formatter for "-10p"
+            CultureInfo.CurrentCulture = new CultureInfo("en-GB", false);
+
             // Load configuration
             _configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
@@ -21,7 +28,7 @@ namespace PriceCalculator
 
             // Run app
             IServiceScope scope = _serviceProvider.CreateScope();
-            scope.ServiceProvider.GetRequiredService<PriceCalculator>().Run();
+            scope.ServiceProvider.GetRequiredService<PriceCalculator>().Run(args);
 
             // Tear down DI
             DisposeServices();

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.Extensions.Options;
 using PriceCalculator.Models;
 
@@ -12,8 +13,11 @@ namespace PriceCalculator
         {
             _config = config.Value;
         }
-        public void Run()
+        public void Run(string[] items)
         {
+            var basket = new Basket(items);
+            var copy = new Basket(basket);
+            Console.WriteLine(string.Join(",", items));
             throw new NotImplementedException();
         }
     }

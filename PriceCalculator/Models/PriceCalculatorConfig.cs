@@ -4,5 +4,6 @@ namespace PriceCalculator.Models
     {
         public const string Section = "PriceCalculator";
         public Product[] Products { get; set; }
+        public Offer[] Offers { get; set; }
     }
 }
