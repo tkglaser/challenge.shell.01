@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace PriceCalculator.Models
@@ -29,33 +30,39 @@ namespace PriceCalculator.Models
             }
         }
 
-        public bool SubtractIfPossible(Basket other)
+        public int FitsTimes(Basket other)
         {
-            if (!CanSubtract(other))
-            {
-                return false;
-            }
+            int contained = int.MaxValue;
             foreach (var kvp in other)
             {
-                this[kvp.Key.ToLowerInvariant()] -= kvp.Value;
+                var safeKey = kvp.Key.ToLowerInvariant();
+                if (!ContainsKey(safeKey))
+                {
+                    return 0;
+                }
+
+                // avoid div by zero
+                if (kvp.Value > 0)
+                {
+                    int itemTimesContained = this[safeKey] / kvp.Value;
+                    contained = Math.Min(contained, itemTimesContained);
+                }
+
+                // cut loop short when possible
+                if (contained == 0)
+                {
+                    return 0;
+                }
             }
-            return true;
+            return contained == int.MaxValue ? 0 : contained;
         }
 
-        private bool CanSubtract(Basket other)
+        public void SubtractTimes(Basket other, int times)
         {
             foreach (var kvp in other)
             {
-                if (!ContainsKey(kvp.Key.ToLowerInvariant()))
-                {
-                    return false;
-                }
-                else if (this[kvp.Key.ToLowerInvariant()] < kvp.Value)
-                {
-                    return false;
-                }
+                this[kvp.Key.ToLowerInvariant()] -= kvp.Value * times;
             }
-            return true;
         }
     }
 }

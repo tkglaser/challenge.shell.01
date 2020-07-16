@@ -35,15 +35,11 @@ namespace PriceCalculator
             var offerBasket = new Basket(basket);
             foreach (var offer in _config.Offers)
             {
-                decimal offerTotal = 0;
-                // TODO: Endless loop?
-                while (offerBasket.SubtractIfPossible(offer.Condition))
+                int fitsTimes = offerBasket.FitsTimes(offer.Condition);
+                if (fitsTimes > 0)
                 {
-                    offerTotal += offer.PriceDelta;
-                }
-                if (offerTotal != 0)
-                {
-                    result.AddOffer(offer, offerTotal);
+                    offerBasket.SubtractTimes(offer.Condition, fitsTimes);
+                    result.AddOffer(offer, offer.PriceDelta * fitsTimes);
                 }
             }
 
