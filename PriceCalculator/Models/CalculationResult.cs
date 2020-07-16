@@ -8,7 +8,7 @@ namespace PriceCalculator.Models
     {
         public decimal SubTotal { get; private set; } = 0.0M;
         public List<AppliedOffer> Offers { get; } = new List<AppliedOffer>();
-        public decimal Total => SubTotal - Offers.Sum(o => o.PriceDelta);
+        public decimal Total => SubTotal + Offers.Sum(o => o.PriceDelta);
 
         public void Add(decimal value)
         {

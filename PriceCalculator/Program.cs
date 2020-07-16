@@ -12,10 +12,7 @@ namespace PriceCalculator
         private static IConfiguration _configuration;
         static void Main(string[] args)
         {
-            // SIMULATED COMMAND LINE!!! REMOVE
-            args = new string[] { "Apple", "Milk", "Bread" };
-
-            // TODO: Write custom formatter for "-10p"
+            // TODO: Write custom formatter for "-10p"?
             CultureInfo.CurrentCulture = new CultureInfo("en-GB", false);
 
             // Load configuration
@@ -40,7 +37,6 @@ namespace PriceCalculator
         {
             IServiceCollection services = new ServiceCollection();
             services.Configure<PriceCalculatorConfig>(_configuration.GetSection(PriceCalculatorConfig.Section));
-            // services.AddSingleton<ICustomer, Customer>();
             services.AddSingleton<PriceCalculator>();
             _serviceProvider = services.BuildServiceProvider(true);
         }

@@ -37,7 +37,7 @@ namespace PriceCalculator.Models
             }
             foreach (var kvp in other)
             {
-                this[kvp.Key] -= kvp.Value;
+                this[kvp.Key.ToLowerInvariant()] -= kvp.Value;
             }
             return true;
         }
@@ -46,11 +46,11 @@ namespace PriceCalculator.Models
         {
             foreach (var kvp in other)
             {
-                if (!ContainsKey(kvp.Key))
+                if (!ContainsKey(kvp.Key.ToLowerInvariant()))
                 {
                     return false;
                 }
-                else if (this[kvp.Key] < kvp.Value)
+                else if (this[kvp.Key.ToLowerInvariant()] < kvp.Value)
                 {
                     return false;
                 }
