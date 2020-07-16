@@ -31,7 +31,7 @@ The application expects a file called `appsettings.json` to be in the current di
 
 ## Testing the application
 
-The application has a set of tests using with MSTest and Moq.
+The application has a set of tests using MSTest and Moq.
 
 The tests can be run using the following commands.
 
