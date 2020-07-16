@@ -20,10 +20,14 @@ Arguments can be passed after `dotnet run` like so:
 cd PriceCalculator
 dotnet run milk bread apple
 ```
-It is also possible to build the project into a Windows executable to achieve the command line as described in the PDF.
+It is also possible to build the project into a Windows executable to achieve the command line as described in the PDF. After a `dotnet build` or `dotnet run` do
+```bash
+cd PriceCalculator/bin/Debug/netcoreapp3.1
+./PriceCalculator milk bread apple
+```
 
 ## Configuration
-The application expects a file called `appsettings.json` to be in the current directory. This file contains a list of products and offers. It can be found in this repo at `PriceCalculator/appsettings.json`
+The application expects a file called `appsettings.json` to be in the current directory. This file contains a list of products and offers. It can be found in this repo at `PriceCalculator/appsettings.json`. If the configuration file is not found, an exception is thrown informing the user that the file is missing. This is intentional because there is not much value in running without the config and I did not want to hard-code a default config.
 
 ## Testing the application
 
