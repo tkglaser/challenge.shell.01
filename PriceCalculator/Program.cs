@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 
 namespace PriceCalculator
 {
@@ -6,7 +7,10 @@ namespace PriceCalculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IConfiguration Configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+                .Build();
+            var products = Configuration.GetSection("products").Value;
         }
     }
 }
