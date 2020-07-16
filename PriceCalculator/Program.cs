@@ -28,7 +28,9 @@ namespace PriceCalculator
 
             // Run app
             IServiceScope scope = _serviceProvider.CreateScope();
-            scope.ServiceProvider.GetRequiredService<PriceCalculator>().Run(args);
+            var result = scope.ServiceProvider.GetRequiredService<PriceCalculator>().Calculate(args);
+
+            Console.WriteLine(result.ToString());
 
             // Tear down DI
             DisposeServices();

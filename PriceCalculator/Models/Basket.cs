@@ -6,7 +6,7 @@ namespace PriceCalculator.Models
     {
         public Basket()
         {
-
+            // for deserialisation
         }
 
         public Basket(Basket other) : base(other)
@@ -20,11 +20,11 @@ namespace PriceCalculator.Models
             {
                 if (!ContainsKey(item))
                 {
-                    Add(item, 1);
+                    Add(item.ToLowerInvariant(), 1);
                 }
                 else
                 {
-                    ++this[item];
+                    ++this[item.ToLowerInvariant()];
                 }
             }
         }

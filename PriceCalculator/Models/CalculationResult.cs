@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -5,14 +6,21 @@ namespace PriceCalculator.Models
 {
     public class CalculationResult
     {
-        public decimal SubTotal { get; }
-        public AppliedOffer[] Offers { get; }
+        public decimal SubTotal { get; private set; } = 0.0M;
+        public List<AppliedOffer> Offers { get; } = new List<AppliedOffer>();
         public decimal Total => SubTotal - Offers.Sum(o => o.PriceDelta);
 
-        public CalculationResult(decimal subTotal, AppliedOffer[] offers)
+        public void Add(decimal value)
         {
-            SubTotal = subTotal;
-            Offers = offers;
+            SubTotal += value;
+        }
+
+        public void AddOffer(Offer offer, decimal value)
+        {
+            var appliedOffer = new AppliedOffer();
+            appliedOffer.Description = offer.Description;
+            appliedOffer.PriceDelta = value;
+            Offers.Add(appliedOffer);
         }
 
         public override string ToString()
