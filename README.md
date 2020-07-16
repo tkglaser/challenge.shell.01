@@ -20,7 +20,7 @@ Arguments can be passed after `dotnet run` like so:
 cd PriceCalculator
 dotnet run milk bread apple
 ```
-It is also possible to build the project into a Windows executable to achieve the command line as described in the PDF. After a `dotnet build` or `dotnet run` do
+It is also possible to build the project into an executable to achieve the command line as described in the PDF. After a `dotnet build` or `dotnet run` do
 ```bash
 cd PriceCalculator/bin/Debug/netcoreapp3.1
 ./PriceCalculator milk bread apple
