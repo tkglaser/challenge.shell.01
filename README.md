@@ -17,9 +17,13 @@ dotnet run
 
 Arguments can be passed after `dotnet run` like so:
 ```bash
+cd PriceCalculator
 dotnet run milk bread apple
 ```
 It is also possible to build the project into a Windows executable to achieve the command line as described in the PDF.
+
+## Configuration
+The application expects a file called `appsettings.json` to be in the current directory. This file contains a list of products and offers. It can be found in this repo at `PriceCalculator/appsettings.json`
 
 ## Testing the application
 
